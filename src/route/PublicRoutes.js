@@ -13,6 +13,7 @@ import Register from './user/Register';
 function PublicRoutes() {
     return (
         <Switch>
+            <Route exact path="/" component={Login} />
             <Route exact path={SLUGS.login} component={Login} />
             <Route exact path={SLUGS.publicdashboard} component={PublicDashboard} />
             <Route exact path={SLUGS.signup} component={Register} />
