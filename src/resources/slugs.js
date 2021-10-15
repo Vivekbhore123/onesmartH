@@ -18,12 +18,17 @@ export default {
 
     CustomersList: '/customers',
     CustomerNew: '/customers/new',
-    CustomerEdit: '/customers/edit/:id',
+    CustomerEdit: '/customers/edit/:id', 
     CustomerShow: '/customers/:id',
 
     DepartmentsList: '/departments',
     DepartmentEdit: '/departments/edit/:id',
     DepartmentShow: '/departments/:id',
+
+    
+    // SubDepartmentsList: '/departments',
+    // SubDepartmentEdit: '/departments/edit/:id',
+    // SubDepartmentShow: '/departments/:id',
 
     EmployeesList: '/employees',
     EmployeeNew: '/employees/new',
@@ -41,12 +46,14 @@ export default {
     TicketEdit: '/tickets/edit/:id',
     TicketShow: '/tickets/:id',
     Reports: '/reports',
+
+    SubReports:'/subreports',
     // test
 
     // admin
 
     //subadmin
-    subadmindashboard: '/subadmindashboard',
+    subadmindashboard: '/subadmindashboard', 
 
     subCustomersList: '/subcustomers',
     subCustomerNew: '/subcustomers/new',
@@ -58,6 +65,9 @@ export default {
     subTicketEdit: '/subtickets/edit/:id',
     subTicketShow: '/subtickets/:id',
     subReports: '/subreports',
+
+    SubDoctorsList:'/subdoctors',
+    subcustomers:'/subcustomers',
 
     subprofile: '/subprofile',
 
@@ -71,12 +81,12 @@ export default {
 
     docprofile: '/docprofile',
 
-    //patient
+    //patient 
     patdashboard: '/patdashboard',
 
     patTicketsList: '/pattickets',
     patTicketNew: '/pattickets/new',
-    patTicketEdit: '/pattickets/edit/:id',
+    patTicketEdit: '/pattickets/edit/:id', 
     patTicketShow: '/pattickets/:id',
 
     patprofile: '/patprofile',

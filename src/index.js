@@ -10,15 +10,15 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 import { setUser } from './actions/user';
-import { startSetCustomers } from './actions/customers';
+import { startSetCustomers,startSetCustomersForSubadmins } from './actions/customers';
 import { startSetDepartments } from './actions/departments';
 import { startSetEmployees } from './actions/employees';
-import { startSetTickets } from './actions/tickets';
+import { startSetTickets} from './actions/tickets';
 
 
 
 import axios from './config/axios';
-import { startSetDoctors } from 'actions/doctors';
+import { startSetDoctors,startSetDoctorsForSubadmins } from 'actions/doctors';
 
 // console.log(localStorage.getItem("authToken"));
 const store = configureStore();
@@ -33,11 +33,23 @@ if (localStorage.getItem('authToken')) {
             const user = response.data;
             // console.log(user);
             store.dispatch(setUser(user));
-            store.dispatch(startSetCustomers());
             store.dispatch(startSetDepartments());
             store.dispatch(startSetEmployees());
-            store.dispatch(startSetTickets());
-            store.dispatch(startSetDoctors());
+            store.dispatch(startSetTickets(user.role,user.email));
+             if(user.role==2)
+                {
+                    store.dispatch(startSetDoctorsForSubadmins()); 
+                    store.dispatch(startSetCustomersForSubadmins()); 
+                }
+                else
+                {
+                    store.dispatch(startSetDoctors()); 
+                    store.dispatch(startSetCustomers());
+
+
+                }
+        
+            
         });
 }
 

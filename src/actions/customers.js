@@ -10,6 +10,13 @@ export const setCustomers = (customer) => {
     }
 }
 
+export const setSubCustomers = (customer) => {
+    return {
+        type: 'SET_SUB_CUSTOMERS',
+        payload : customer
+    }
+}
+
 
 export const startSetCustomers = () => {
     return (dispatch) => {
@@ -86,7 +93,7 @@ export const editCustomer = (customer) => {
     }
 }
 
-export const startEditCustomer = (customer,id,redirect) => {
+export const startEditCustomer = (customer,id,redirect) => { 
     return(dispatch) => {
         axios.put(`/customers/${id}`,customer,{
             headers: {
@@ -105,5 +112,25 @@ export const startEditCustomer = (customer,id,redirect) => {
                 //dispatch(updateTicketCustomer(customer))
             }
         })
+    }
+}
+
+
+
+export const startSetCustomersForSubadmins=()=>{
+    return (dispatch) => {
+        axios.get('/subcustomers',{
+                    headers: {
+                        'x-auth': localStorage.getItem('authToken')
+                    }
+                })
+            .then(response=>{
+                const customers = response.data
+                dispatch(setSubCustomers(customers))
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+
     }
 }

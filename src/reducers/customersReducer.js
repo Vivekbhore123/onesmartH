@@ -17,6 +17,8 @@ const customersReducer = (state =[],action) =>{
                 return Object.assign({},customer)
             }
         })
+        case 'SET_SUB_CUSTOMERS':return [].concat(state,action.payload)
+
         default : return [...state]
     }
 }

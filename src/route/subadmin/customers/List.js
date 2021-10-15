@@ -74,7 +74,7 @@ class CustomersList extends React.Component {
                                     <td>{customer.email}</td>
                                     <td>{customer.mobile}</td>
                                     <td>
-                                        <Link to={`/customers/${customer._id}`}>
+                                        <Link to={`/subcustomers/${customer._id}`}>
                                         <Button color="info">show</Button></Link>
                                         </td>
                                     <td>
@@ -90,7 +90,7 @@ class CustomersList extends React.Component {
 
                 </Table>
 
-                <Link to="customers/new" className="btn btn-primary">Add Customer</Link>
+                <Link to="subcustomers/new" className="btn btn-primary">Add Customer</Link>
             </div>
         )
     }

@@ -84,14 +84,14 @@ class TicketTab extends React.Component {
                   <thead>
                     <tr>
                       <th>Code No</th>
-                      <th>Customer</th>
+                      {/* <th>Customer</th> */}
                       <th>Department</th>
-                      <th>Employees</th>
+                      <th>Agents</th>
                       <th>Message</th>
                       <th>Priority</th>
                       <th>Actions</th>
-                      <th>Remove</th>
-                      <th>Complete</th>
+                      {/* <th>Remove</th>
+                      <th>Complete</th> */}
                     </tr>
                   </thead>
                   <tbody>
@@ -100,11 +100,11 @@ class TicketTab extends React.Component {
                         !ticket.isResolved && (
                           <tr key={ticket._id}>
                             <td>{ticket.code}</td>
-                            <td>
+                            {/* <td>
                               {ticket.customer.name
                                 ? ticket.customer.name
                                 : this.findCustomer(ticket.customer).name}{" "}
-                            </td>
+                            </td> */}
                             <td>
                               {ticket.department.name
                                 ? ticket.department.name
@@ -127,11 +127,11 @@ class TicketTab extends React.Component {
                             <td>{ticket.message} </td>
                             <td>{ticket.priority}</td>
                             <td>
-                              <Link to={`/tickets/${ticket._id}`}>
+                              <Link to={`/pattickets/${ticket._id}`}>
                                 <Button color="info">show</Button>
                               </Link>
                             </td>
-                            <td>
+                            {/* <td>
                               <Button
                                 color="danger"
                                 onClick={() => {
@@ -140,15 +140,15 @@ class TicketTab extends React.Component {
                               >
                                 remove
                               </Button>
-                            </td>
-                            <td>
+                            </td> */}
+                            {/* <td>
                               <input
                                 type="checkbox"
                                 onClick={() => {
                                   this.props.handleResolve(ticket._id);
                                 }}
                               />
-                            </td>
+                            </td> */}
                           </tr>
                         )
                       );
@@ -169,14 +169,14 @@ class TicketTab extends React.Component {
                   <thead>
                     <tr>
                       <th>Code No</th>
-                      <th>Customer</th>
+                      {/* <th>Customer</th> */}
                       <th>Department</th>
-                      <th>Employees</th>
+                      <th>Agents</th>
                       <th>Message</th>
                       <th>Priority</th>
                       <th>Actions</th>
-                      <th>Remove</th>
-                      <th>Not Complete</th>
+                      {/* <th>Remove</th>
+                      <th>Not Complete</th> */}
                     </tr>
                   </thead>
                   <tbody>
@@ -186,11 +186,11 @@ class TicketTab extends React.Component {
                         ticket.isResolved && (
                           <tr key={ticket._id}>
                             <td>{ticket.code}</td>
-                            <td>
+                            {/* <td>
                               {ticket.customer.name
                                 ? ticket.customer.name
                                 : this.findCustomer(ticket.customer).name}{" "}
-                            </td>
+                            </td> */}
                             {console.log(ticket.department)}
                             <td>
                               {ticket.department.name
@@ -214,11 +214,11 @@ class TicketTab extends React.Component {
                             <td>{ticket.message}</td>
                             <td>{ticket.priority}</td>
                             <td>
-                              <Link to={`/tickets/${ticket._id}`}>
+                              <Link to={`/pattickets/${ticket._id}`}>
                                 <Button color="info">show</Button>
                               </Link>
                             </td>
-                            <td>
+                            {/* <td>
                               <Button
                                 color="danger"
                                 onClick={() => {
@@ -227,15 +227,15 @@ class TicketTab extends React.Component {
                               >
                                 Remove
                               </Button>
-                            </td>
-                            <td>
+                            </td> */}
+                            {/* <td>
                               <input
                                 type="checkbox"
                                 onClick={() => {
                                   this.props.handleResolve(ticket._id);
                                 }}
                               />
-                            </td>
+                            </td> */}
                           </tr>
                         )
                       );

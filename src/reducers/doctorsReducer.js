@@ -30,6 +30,8 @@ const doctorsReducer = (state = [], action) => {
                     return Object.assign({}, doctor);
                 }
             });
+        case 'SET_SUB_DOCTORS':  
+           return [].concat(state, action.payload);  
         default:
             return [...state];
     }

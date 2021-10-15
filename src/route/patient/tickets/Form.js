@@ -5,10 +5,11 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 import { connect } from "react-redux";
 
+
 class TicketForm extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props.ticket);
+    // console.log(props.ticket);
     this.state = {
       code: props.ticket ? props.ticket.code : "",
       customer: props.ticket ? props.ticket.customer._id : "",
@@ -31,6 +32,8 @@ class TicketForm extends React.Component {
       message: props.ticket ? props.ticket.message : "",
       priority: props.ticket ? props.ticket.priority : "",
       isResolved: props.ticket ? props.ticket.isResolved : "",
+      
+    
     };
   }
   handleChange = async (e) => {
@@ -60,13 +63,16 @@ class TicketForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const formData = {
-      code: this.state.code,
-      customer: this.state.customer,
-      department: this.state.department,
-      employees: this.state.employee,
+      code:this.props.fromnew=="fromnew"? this.props.gencpassword:this.state.code,
+      customer: this.state.customer? this.state.customer:"6127236b6030eb0b400608a1",
+      department: this.state.department? this.state.department:"60ffbd59c32d8b4678bc4072",
+      employees: this.state.employee? this.state.employee:[{id:"61004b665ded5e36f0b67e86"}],
       message: this.state.message,
-      priority: this.state.priority,
+      priority: this.state.priority?this.state.priority:"medium",
       isResolved: this.state.isResolved,
+      doctors:[],
+      empviv:"61004b665ded5e36f0b67e86",
+      doctviv:"6114066484e79038f41849f9"
     };
     this.props.ticket && (formData.id = this.props.ticket._id);
     this.props.handleSubmit(formData);
@@ -74,6 +80,10 @@ class TicketForm extends React.Component {
   };
 
   componentDidMount() {
+
+    console.log(this.props.user);
+    console.log(this.props.user._id);
+   
     axios
       .get("/employees", {
         headers: {
@@ -149,7 +159,20 @@ class TicketForm extends React.Component {
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>
-          <FormGroup>
+          {this.props.fromnew=="fromnew" && (
+            <FormGroup>
+            <Label htmlFor="code">Code</Label>
+            <Input
+              type="text"
+              id="code"
+              value={this.props.gencpassword}
+              onChange={this.handleChange}
+              name="code"
+              disabled
+            />
+          </FormGroup>
+          )}
+          {/* <FormGroup>
             <Label htmlFor="code">Code</Label>
             <Input
               type="text"
@@ -158,9 +181,9 @@ class TicketForm extends React.Component {
               onChange={this.handleChange}
               name="code"
             />
-          </FormGroup>
+          </FormGroup> */}
 
-          <FormGroup>
+          {/* <FormGroup>
             <Label htmlFor="customer">Customer</Label>
             <Input
               type="select"
@@ -178,9 +201,9 @@ class TicketForm extends React.Component {
                 );
               })}
             </Input>
-          </FormGroup>
+          </FormGroup> */}
 
-          <FormGroup>
+          {/* <FormGroup>
             <Label htmlFor="department">Department</Label>
             <Input
               type="select"
@@ -198,9 +221,9 @@ class TicketForm extends React.Component {
                 );
               })}
             </Input>
-          </FormGroup>
+          </FormGroup> */}
 
-          <label>Employees</label>
+          {/* <label>Employees</label>
           <Select
             name="employee"
             placeholder="Select"
@@ -209,7 +232,7 @@ class TicketForm extends React.Component {
             onChange={this.handleMultiChange}
             isMulti
           />
-          {console.log(this.state.employeenew)}
+          {console.log(this.state.employeenew)} */}
           <br />
           <FormGroup>
             <Label htmlFor="message">Message</Label>
@@ -221,7 +244,7 @@ class TicketForm extends React.Component {
             />
           </FormGroup>
 
-          <FormGroup tag="fieldset">
+          {/* <FormGroup tag="fieldset">
             <legend>Priority</legend>
             <FormGroup check>
               <Label check>
@@ -260,7 +283,7 @@ class TicketForm extends React.Component {
               </Label>
             </FormGroup>
           </FormGroup>
-          <br />
+          <br /> */}
 
           <Button type="submit">Submit</Button>
         </Form>
@@ -275,6 +298,7 @@ const mapStateToProps = (state) => {
     customers: state.customers,
     departments: state.departments,
     employees: state.employees,
+    user:state.user
   };
 };
 

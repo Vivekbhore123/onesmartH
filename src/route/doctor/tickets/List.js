@@ -115,4 +115,4 @@ const mapsStateToProps = (state) => {
     }
 }
 
-export default connect(mapsStateToProps)(TicketsList)
+export default connect(mapsStateToProps)(TicketsList) 

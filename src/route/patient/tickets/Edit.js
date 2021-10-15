@@ -2,14 +2,16 @@ import React from 'react'
 import TicketForm from './Form'
 
 import {connect} from 'react-redux'
-import {startEditTicket} from '../../../actions/tickets'
+import {startEditTicketTwo} from '../../../actions/tickets'
 
 class TicketEdit extends React.Component{
     handleSubmit = (ticket) => {
 
-        const redirect = () => this.props.history.push(`/tickets/${ticket.id}`)
-        this.props.dispatch(startEditTicket(ticket,redirect))
-
+        const redirect = () => this.props.history.push(`/pattickets/${ticket.id}`)
+        this.props.dispatch(startEditTicketTwo(ticket,redirect))
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
     }
     render(){
         return (

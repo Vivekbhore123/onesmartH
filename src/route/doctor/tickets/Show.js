@@ -32,7 +32,7 @@ import { ListGroup, ListGroupItem } from 'reactstrap'
                     <ListGroupItem>Message - {this.props.ticket.message}</ListGroupItem>
                     <ListGroupItem>Priority - {this.props.ticket.priority}</ListGroupItem>
                     </ListGroup>
-                    <Link className="ml-1" to={`/tickets/edit/${this.props.ticket._id}`}>Edit</Link>
+                    <Link className="ml-1" to={`/doctickets/edit/${this.props.ticket._id}`}>Edit</Link>
                     </div>
                 )}
 

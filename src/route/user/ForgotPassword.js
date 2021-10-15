@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
-import { getResetPasswordLink } from "../../actions/user";
+import { getResetPasswordLink } from "../../actions/user"; 
 // import Loader from "./loader";
 
 const ForgotPassword = () => {

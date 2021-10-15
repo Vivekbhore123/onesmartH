@@ -108,9 +108,30 @@ const Login = () => {
                             Forgot Password
                         </button>
                     </Link>
+                    <br />
+                    <hr />
                     <h3>Admin login</h3>
                     <h4>Username = vivekbhore50@gmail.com</h4>
                     <h4>Password = Abc@123</h4>
+                    <br />
+                    <hr />
+                    <h3>SubAdmin login</h3>
+                    <h4>Username = vivekbhore5000@gmail.com</h4>
+                    <h4>Password = Mno@123</h4>
+                    <br />
+                    <hr />
+                    <h3>Doctor login</h3>
+                    <h4>Username = kalyanibhore2020@gmail.com</h4>
+                    <h4>Password = Pqr@123</h4>
+                    <br />
+                    <hr />
+                    <h3>Patient login</h3>
+                    <h4>Username = bhoresudhakar26@gmail.com</h4>
+                    <h4>Password = Xyz@123</h4>
+                    <br />
+                    <hr />
+                    <br />
+                    
                 </form>
             </div>
         </>

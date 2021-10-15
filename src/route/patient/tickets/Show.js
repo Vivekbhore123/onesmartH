@@ -19,7 +19,11 @@ import { ListGroup, ListGroupItem } from 'reactstrap'
         return this.props.employees.find(employee => employee._id == id)
     }
 
-    render(){
+    findDoctors = (id) => {
+        return this.props.doctors.find(doctor => doctor._id == id)
+    }
+
+    render(){ 
         return (
             <div>
                 {this.props.ticket && (
@@ -27,12 +31,13 @@ import { ListGroup, ListGroupItem } from 'reactstrap'
                     <h2>Code Number - {this.props.ticket.code}</h2>
                     <ListGroup>
                     <ListGroupItem>Customer -{this.props.ticket.customer.name? this.props.ticket.customer.name : this.findCustomer(this.props.ticket.customer).name}  </ListGroupItem>
-                    <ListGroupItem>Employees - {this.props.ticket.employees[0].name ? this.props.ticket.employees.map((emp,index)=>(index===this.props.ticket.employees.length-1)?`${emp.name}`: `${emp.name}, `): this.props.ticket.employees.map((emp,index)=>(index===this.props.ticket.employees.length-1)?`${this.findEmployees(emp).name}`: `${this.findEmployees(emp).name}, `)} </ListGroupItem>
+                    <ListGroupItem>Agents - {this.props.ticket.employees[0].name ? this.props.ticket.employees.map((emp,index)=>(index===this.props.ticket.employees.length-1)?`${emp.name}`: `${emp.name}, `): this.props.ticket.employees.map((emp,index)=>(index===this.props.ticket.employees.length-1)?`${this.findEmployees(emp).name}`: `${this.findEmployees(emp).name}, `)} </ListGroupItem>
+                    <ListGroupItem>Doctors - {this.props.ticket.doctors[0].name ? this.props.ticket.doctors.map((doc,index)=>(index===this.props.ticket.doctors.length-1)?`${doc.name}`: `${doc.name}, `): this.props.ticket.doctors.map((doc,index)=>(index===this.props.ticket.doctors.length-1)?`${this.findDoctors(doc).name}`: `${this.findDoctors(doc).name}, `)} </ListGroupItem>
                     <ListGroupItem>Department - {this.props.ticket.department.name? this.props.ticket.department.name: this.findDepartment(this.props.ticket.department).name}</ListGroupItem>
                     <ListGroupItem>Message - {this.props.ticket.message}</ListGroupItem>
                     <ListGroupItem>Priority - {this.props.ticket.priority}</ListGroupItem>
                     </ListGroup>
-                    <Link className="ml-1" to={`/tickets/edit/${this.props.ticket._id}`}>Edit</Link>
+                    <Link className="ml-1" to={`/pattickets/edit/${this.props.ticket._id}`}>Edit</Link>
                     </div>
                 )}
 

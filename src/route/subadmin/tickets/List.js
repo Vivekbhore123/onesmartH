@@ -9,13 +9,14 @@ import swal from 'sweetalert2'
 import {Progress} from 'reactstrap'
 
 import {connect}  from 'react-redux'
+// import {startToggleResolve} from '../../actions/tickets'
 import {startToggleResolve} from '../../../actions/tickets'
 import {startRemoveTicket} from '../../../actions/tickets'
 
 
 class TicketsList extends React.Component{
     constructor(props){
-        console.log(props.tickets);
+        console.log(props);
         super(props)
         this.state = {
             search:'',
@@ -25,7 +26,7 @@ class TicketsList extends React.Component{
 
     findDepartment = async (id) => {
         const pleasewait = await this.props.departments.find(
-          (dept) => dept._id == id
+          (dept) => dept._id === id
         );
         return pleasewait;
     }
@@ -44,14 +45,14 @@ class TicketsList extends React.Component{
               });
               this.props.dispatch(startRemoveTicket(id))
               this.setState(prevState=>({
-                currentTickets: prevState.currentTickets.filter(ticket=>ticket._id != id)
+                currentTickets: prevState.currentTickets.filter(ticket=>ticket._id !== id)
             }))
                 }
              })
     }
 
     handleResolve = (id) =>{
-        const ticket = this.props.tickets.find(ticket=>ticket._id == id)
+        const ticket = this.props.tickets.find(ticket=>ticket._id === id)
         const isResolved = ticket.isResolved
 
         this.props.dispatch(startToggleResolve(id,isResolved))
@@ -92,12 +93,12 @@ class TicketsList extends React.Component{
                     </Col>
 
                 </Row>
-                <Row>
+                <Row> 
                 <Col>
+                        {console.log(this.props)}
+                    <TicketTab tickets= {this.state.currentTickets.length === 0? this.props.tickets : this.state.currentTickets} handleResolve={this.handleResolve} handleRemove={this.handleRemove}/>
 
-                    <TicketTab tickets= {this.state.currentTickets.length == 0? this.props.tickets : this.state.currentTickets} handleResolve={this.handleResolve} handleRemove={this.handleRemove}/>
-
-                    <Link to ="/tickets/new" className="mb-4 mt btn btn-primary">Add Ticket</Link>
+                    <Link to ="/subtickets/new" className="mb-4 mt btn btn-primary">Add Ticket</Link>
                  </Col>
 
 
@@ -110,6 +111,7 @@ class TicketsList extends React.Component{
 }
 
 const mapsStateToProps = (state) => {
+    console.log(state);
     return {
         tickets: state.tickets,
         departments: state.departments

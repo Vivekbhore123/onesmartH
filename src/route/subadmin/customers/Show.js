@@ -24,7 +24,7 @@ class CustomerShow extends React.Component {
             }
         })
         .then(response=>{
-
+             console.log(response.data);  
             this.setState({tickets:response.data.tickets})
 
         })
@@ -53,7 +53,7 @@ class CustomerShow extends React.Component {
                          <h3>{this.props.customer.name} - {this.props.customer.email}</h3>
                     </Col>
                     <Col md= "3">
-                        <Link to={`/customers/edit/${this.props.customer._id}`}> <h3>Edit Details</h3> </Link>
+                        <Link to={`/subcustomers/edit/${this.props.customer._id}`}> <h3>Edit Details</h3> </Link>
                     </Col>
 
                     </Row>
@@ -71,7 +71,7 @@ class CustomerShow extends React.Component {
                                             <CardBody>
                                                 <CardText>Message : {ticket.message}</CardText>
                                                 <CardText> Ticket Status: {ticket.isResolved?<span style={{color:"green"}}>Resolved</span>:<span style={{color:"red"}}>Pending</span>}</CardText>
-                                                <Link to={`/tickets/${ticket._id}`}><Button color="primary">View Tickets</Button></Link>
+                                                <Link to={`/subtickets/${ticket._id}`}><Button color="primary">View Tickets</Button></Link>
                                             </CardBody>
                                         </Card>
                                     </Col>

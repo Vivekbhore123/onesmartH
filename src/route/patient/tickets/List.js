@@ -4,11 +4,11 @@ import {Link} from 'react-router-dom'
 import TicketTab from './Tab'
 
 import { Container, Row, Col } from 'reactstrap'
-
+ 
 import swal from 'sweetalert2'
 import {Progress} from 'reactstrap'
 
-import {connect}  from 'react-redux'
+import {connect}  from 'react-redux';
 import {startToggleResolve} from '../../../actions/tickets'
 import {startRemoveTicket} from '../../../actions/tickets'
 
@@ -68,6 +68,7 @@ class TicketsList extends React.Component{
 
 
     calculatePercentage(){
+        console.log(this.props.tickets);
         const allTickets = this.props.tickets.length
         const completedTickets = this.props.tickets.filter(ticket=>ticket.isResolved).length
         const percent = Math.round((completedTickets/allTickets)*100)
@@ -88,7 +89,7 @@ class TicketsList extends React.Component{
                     <Col>
                     <div className="text-center">Completed Tickets: {this.calculatePercentage()}%</div>
                     <Progress className="mb-5" striped value={`${this.calculatePercentage()}`}/>
-                    </Col>
+                    </Col> 
 
                 </Row>
                 <Row>
@@ -96,7 +97,7 @@ class TicketsList extends React.Component{
 
                     <TicketTab tickets= {this.state.currentTickets.length == 0? this.props.tickets : this.state.currentTickets} handleResolve={this.handleResolve} handleRemove={this.handleRemove}/>
 
-                    <Link to ="/tickets/new" className="mb-4 mt btn btn-primary">Add Ticket</Link>
+                    <Link to ="/pattickets/new" className="mb-4 mt btn btn-primary">Add Ticket</Link>
                  </Col>
 
 

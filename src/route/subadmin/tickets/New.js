@@ -6,10 +6,12 @@ import {connect} from 'react-redux'
 import {startAddTicket} from '../../../actions/tickets'
 
 class TicketNew extends React.Component{
-    handleSubmit = (ticket) => {
-
+    handleSubmit = (ticket,x) => {
+         console.log(ticket);
+         console.log(x);
         const redirect = () => this.props.history.push('/tickets')
-        this.props.dispatch(startAddTicket(ticket,redirect))
+        // const redirect = () => alert("testing")
+        this.props.dispatch(startAddTicket(ticket,x,redirect))
         setTimeout(() => {
             window.location.reload();
         }, 1000);

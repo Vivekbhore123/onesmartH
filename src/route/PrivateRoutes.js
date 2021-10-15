@@ -11,7 +11,7 @@ import PatientRoute from './auth/PatientRoute';
 import SubAdminRoute from './auth/SubAdminRoute';
 import CommonProfRoute from './auth/CommonProfRoute';
 
-
+ 
 
 // admin
 
@@ -23,6 +23,10 @@ import CustomerEdit from './admin/customers/Edit';
 import DepartmentsList from './admin/departments/List';
 import DepartmentShow from './admin/departments/Show';
 import DepartmentEdit from './admin/departments/Edit';
+
+import SubDepartmentsList from './subadmin/departments/List';
+import SubDepartmentShow from './subadmin/departments/Show';
+import SubDepartmentEdit from './subadmin/departments/Edit';
 
 import EmployeesList from './admin/employees/List';
 import EmployeeNew from './admin/employees/New';
@@ -37,13 +41,14 @@ import DoctorEdit from './admin/doctors/Edit';
 
 import TicketsList from './admin/tickets/List';
 import TicketNew from './admin/tickets/New';
+import SubTicketNew from './subadmin/tickets/New';
 import TicketShow from './admin/tickets/Show';
 import TicketEdit from './admin/tickets/Edit';
 
 import Reports from './admin/tickets/Reports';
 import Profile from './admin/profile/Profile';
-import EditProfile from './admin/profile/EditProfile';
-import CreateNewPassword from './admin/profile/createNewPassword';
+// import EditProfile from './admin/profile/EditProfile';
+// import CreateNewPassword from './admin/profile/createNewPassword';
 import ChangePassword from './admin/profile/ChangePassword';
 
 // admin
@@ -51,48 +56,60 @@ import ChangePassword from './admin/profile/ChangePassword';
 
 //subadmin
 
-
-// import SubCustomersList from './subadmin/customers/List';
-// import SubCustomerNew from './subadmin/customers/New';
-// import SubCustomerShow from './subadmin/customers/Show';
-// import SubCustomerEdit from './subadmin/customers/Edit';
+import SubReports from './subadmin/tickets/Reports';
 
 
-// import SubTicketsList from './subadmin/tickets/List';
+import SubCustomersList from './subadmin/customers/List'; 
+import SubCustomerNew from './subadmin/customers/New';
+import SubCustomerShow from './subadmin/customers/Show';
+import SubCustomerEdit from './subadmin/customers/Edit'; 
+
+
+
+import SubDoctorsList from './subadmin/doctors/List';
+import SubDoctorNew from './subadmin/doctors/New';
+import SubDoctorShow from './subadmin/doctors/Show';
+import SubDoctorEdit from './subadmin/doctors/Edit';
+
+
+
+import SubTicketsList from './subadmin/tickets/List';
 // import SubTicketNew from './subadmin/tickets/New';
-// import SubTicketShow from './subadmin/tickets/Show';
-// import SubTicketEdit from './subadmin/tickets/Edit';
+import SubTicketShow from './subadmin/tickets/Show';
+import SubTicketEdit from './subadmin/tickets/Edit';
+
+// import SubDoctorsList from './subadmin/'
 
 import SubProfile from './subadmin/profile/Profile';
-import SubCreateNewPassword from './subadmin/profile/Profile';
-import SubChangePassword from './subadmin/profile/Profile';
+// import SubCreateNewPassword from './subadmin/profile/createNewPassword';
+import SubChangePassword from './subadmin/profile/ChangePassword';
 
 //subadmin
 
 //doctor
-// import DocProfile from './doctor/profile/Profile';
+import DocProfile from './doctor/profile/Profile';
 // import DocCreateNewPassword from './doctor/profile/createNewPassword';
-// import DocChangePassword from './doctor/profile/ChangePassword';
+import DocChangePassword from './doctor/profile/ChangePassword';
 
 
-// import DocTicketsList from './doctor/tickets/List';
-// import DocTicketNew from './doctor/tickets/New';
-// import DocTicketShow from './doctor/tickets/Show';
-// import DocTicketEdit from './doctor/tickets/Edit';
+import DocTicketsList from './doctor/tickets/List';
+import DocTicketNew from './doctor/tickets/New';
+import DocTicketShow from './doctor/tickets/Show';
+import DocTicketEdit from './doctor/tickets/Edit';
 
 
 //doctor
 
 //patient
-// import PatProfile from './patient/profile/Profile';
+import PatProfile from './patient/profile/Profile';
 // import PatCreateNewPassword from './patient/profile/createNewPassword';
 import PatChangePassword from './patient/profile/ChangePassword';
 
 
-// import PatTicketsList from './patient/tickets/List';
-// import PatTicketNew from './patient/tickets/New';
-// import PatTicketShow from './patient/tickets/Show';
-// import PatTicketEdit from './patient/tickets/Edit';
+import PatTicketsList from './patient/tickets/List';
+import PatTicketNew from './patient/tickets/New';
+import PatTicketShow from './patient/tickets/Show';
+import PatTicketEdit from './patient/tickets/Edit';
 // import NotFound from './user/NotFound';
 
 
@@ -129,11 +146,13 @@ function PrivateRoutes() {
                 {/* admin */}
                 <AdminRoute exact path={SLUGS.admindashboard} component={AdminDashboard} />
                 <AdminRoute exact path={SLUGS.adprofile} component={Profile} />
-                <AdminRoute exact path={SLUGS.updateadprofile} component={EditProfile} />
+                {/* <AdminRoute exact path={SLUGS.updateadprofile} component={EditProfile} /> */}
+
                 <AdminRoute path='/customers' component={CustomersList} exact={true} />
                 <AdminRoute exact path='/customers/new' component={CustomerNew} />
                 <AdminRoute exact path='/customers/edit/:id' component={CustomerEdit} />
                 <AdminRoute exact path='/customers/:id' component={CustomerShow} />
+
                 <AdminRoute path='/departments' component={DepartmentsList} exact={true} />
                 <AdminRoute exact path='/departments/edit/:id' component={DepartmentEdit} />
                 <AdminRoute exact path='/departments/:id' component={DepartmentShow} />
@@ -153,46 +172,72 @@ function PrivateRoutes() {
                 <AdminRoute exact path='/tickets/edit/:id' component={TicketEdit} />
                 <AdminRoute exact path='/tickets/:id' component={TicketShow} />
                 <AdminRoute exact path='/reports' component={Reports} />
-                <AdminRoute exact path='/createNewPassword/:token' component={CreateNewPassword} />
+                {/* <AdminRoute exact path='/createNewPassword/:token' component={CreateNewPassword} /> */}
                 <AdminRoute exact path='/updatePassword' component={ChangePassword} />
 
                 {/* admin */}
                 {/* subadmin */}
                 <SubAdminRoute exact path={SLUGS.subadmindashboard} component={SubAdminDashboard} />
-                <CommonProfRoute exact path={SLUGS.subprofile} component={SubProfile} />
-                <SubAdminRoute path='/customers' component={CustomersList} exact={true} />
+
+                <SubAdminRoute exact path={SLUGS.subprofile} component={SubProfile} />
+
+                {/* <SubAdminRoute path='/customers' component={CustomersList} exact={true} />
                 <SubAdminRoute exact path='/customers/new' component={CustomerNew} />
                 <SubAdminRoute exact path='/customers/edit/:id' component={CustomerEdit} />
-                <SubAdminRoute exact path='/customers/:id' component={CustomerShow} />
-                <SubAdminRoute path='/tickets' component={TicketsList} exact={true} />
-                <SubAdminRoute exact path='/tickets/new' component={TicketNew} />
-                <SubAdminRoute exact path='/tickets/edit/:id' component={TicketEdit} />
-                <SubAdminRoute exact path='/tickets/:id' component={TicketShow} />
+                <SubAdminRoute exact path='/customers/:id' component={CustomerShow} /> */}
+
+                <SubAdminRoute path='/subtickets' component={SubTicketsList} exact={true} />
+                <SubAdminRoute exact path='/subtickets/new' component={SubTicketNew} />
+                <SubAdminRoute exact path='/subtickets/edit/:id' component={SubTicketEdit} />
+                <SubAdminRoute exact path='/subtickets/:id' component={SubTicketShow} />
+
                 <SubAdminRoute exact path='/subupdatePassword' component={SubChangePassword} />
-                <AdminRoute
+                {/* <SubAdminRoute path='/subdoctors' component={SubDoctorsList} exact={true} /> */}
+
+                <SubAdminRoute path='/subdoctors' component={SubDoctorsList} exact={true} />
+                <SubAdminRoute exact path='/subdoctors/new' component={SubDoctorNew} />
+                <SubAdminRoute exact path='/subdoctors/edit/:id' component={SubDoctorEdit} />
+                <SubAdminRoute exact path='/subdoctors/:id' component={SubDoctorShow} />
+
+                <SubAdminRoute path='/subdepartments' component={SubDepartmentsList} exact={true} />
+                <SubAdminRoute exact path='/subdepartments/edit/:id' component={SubDepartmentEdit} />
+                <SubAdminRoute exact path='/subdepartments/:id' component={SubDepartmentShow} />
+
+
+                <SubAdminRoute path='/subcustomers' component={SubCustomersList} exact={true} />
+                <SubAdminRoute exact path='/subcustomers/new' component={SubCustomerNew} />
+                <SubAdminRoute exact path='/subcustomers/edit/:id' component={SubCustomerEdit} />
+                <SubAdminRoute exact path='/subcustomers/:id' component={SubCustomerShow} />
+                
+                <SubAdminRoute exact path='/subreports' component={SubReports} />
+
+
+                {/* <AdminRoute
                     exact
                     path='/subcreateNewPassword/:token'
-                    component={SubCreateNewPassword}
-                />
+                    component={SubCreateNewPassword}  
+                /> */} 
 
                 {/* subadmin */}
                 {/* doctor */}
-                <DoctorRoute exact path={SLUGS.admindashboard} component={DoctorDashboard} />
-                <DoctorRoute exact path={SLUGS.adprofile} component={Profile} />
-                <DoctorRoute path='/tickets' component={TicketsList} exact={true} />
-                <DoctorRoute exact path='/tickets/new' component={TicketNew} />
-                <DoctorRoute exact path='/tickets/edit/:id' component={TicketEdit} />
-                <DoctorRoute exact path='/tickets/:id' component={TicketShow} />
+                <DoctorRoute exact path={SLUGS.docdashboard} component={DoctorDashboard} />
+                <DoctorRoute exact path={SLUGS.docprofile} component={DocProfile} />
+                <DoctorRoute path='/doctickets' component={DocTicketsList} exact={true} />
+                <DoctorRoute exact path='/doctickets/new' component={DocTicketNew} />
+                <DoctorRoute exact path='/doctickets/edit/:id' component={DocTicketEdit} />
+                <DoctorRoute exact path='/doctickets/:id' component={DocTicketShow} />
+                <DoctorRoute exact path='/docupdatePassword' component={DocChangePassword} />
+
                 {/* doctor */}
                 {/* patient */}
-                <PatientRoute path='/patdashboard' exact component={PatientDashboard} />
-                <PatientRoute exact path={SLUGS.adprofile} component={Profile} />
+                <PatientRoute path={SLUGS.patdashboard} exact component={PatientDashboard} />
+                <PatientRoute exact path={SLUGS.patprofile} component={PatProfile} />
 
                 <PatientRoute exact path='/patupdatePassword' component={PatChangePassword} />
-                <PatientRoute path='/tickets' component={TicketsList} exact={true} />
-                <PatientRoute exact path='/tickets/new' component={TicketNew} />
-                <PatientRoute exact path='/tickets/edit/:id' component={TicketEdit} />
-                <PatientRoute exact path='/tickets/:id' component={TicketShow} />
+                <PatientRoute path={SLUGS.patTicketsList} component={PatTicketsList} exact={true} />
+                <PatientRoute exact path='/pattickets/new' component={PatTicketNew} />
+                <PatientRoute exact path='/pattickets/edit/:id' component={PatTicketEdit} />
+                <PatientRoute exact path='/pattickets/:id' component={PatTicketShow} />
                 {/* patient */}
                 {/* <Route exact path={SLUGS.overviewTwo} render={() => <div>overviewTwo</div>} />
                 <Route exact path={SLUGS.overviewThree} render={() => <div>overviewThree</div>} />
@@ -209,8 +254,8 @@ function PrivateRoutes() {
                 {/* <Route component={NotFound}></Route> */}
 
                 {user.role === 1 && <Route component={AdminDashboard} />}
-                {user.role === 2 && <Route component={PatientDashboard} />}
-                {user.role === 3 && <Route component={SLUGS.admindashboard} />}
+                {user.role === 2 && <Route component={SubAdminDashboard} />}
+                {user.role === 3 && <Route component={DoctorDashboard} />}
                 {user.role === 4 && <Route component={PatientDashboard} />}
             </Switch>
         </Suspense>

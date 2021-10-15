@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 // import { useDispatch } from 'react-redux';
-// import { Link, useParams } from 'react-router-dom';
+// import { Link, useParams } from 'react-router-dom'; 
 
 import { Toaster } from 'react-hot-toast';
 

@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 
 import swal from 'sweetalert2';
 import { connect } from 'react-redux';
-import { startRemoveUser } from '../../actions/user';
+import { startRemoveUser } from '../../actions/user';  
 
 
 import {
@@ -101,51 +101,102 @@ function SidebarComponent(props) {
                     onClick={() => onClick(SLUGS.patdashboard)}
                 />
             )}
-
-           {user.role ===1 && (
-                <MenuItem
-                id={SLUGS.overview}
-                items={[SLUGS.overviewTwo, SLUGS.overviewThree]}
-                title='Overview'
-                icon={IconOverview}
-            >
+            {user.role === 1 && (
                 <MenuItem
                     id={SLUGS.overview}
-                    title='Customers'
-                    level={2}
-                    icon={IconAgents}
-                    onClick={() => onClick(SLUGS.CustomersList)}
-                />
+                    items={[SLUGS.overviewTwo, SLUGS.overviewThree]}
+                    title='Overview'
+                    icon={IconOverview}
+                >
+                    <MenuItem
+                        id={SLUGS.overview}
+                        title='Customers'
+                        level={2}
+                        icon={IconAgents}
+                        onClick={() => onClick(SLUGS.CustomersList)}
+                    />
 
-                <MenuItem
-                    id={SLUGS.overviewTwo}
-                    title='Employees'
-                    level={2}
-                    icon={IconContacts}
-                    onClick={() => onClick(SLUGS.EmployeesList)}
-                />
+                    <MenuItem
+                        id={SLUGS.overviewTwo}
+                        title='Employees'
+                        level={2}
+                        icon={IconContacts}
+                        onClick={() => onClick(SLUGS.EmployeesList)}
+                    />
 
+                    <MenuItem
+                        id={SLUGS.overviewThree}
+                        title='Departments'
+                        level={2}
+                        icon={IconArticles}
+                        onClick={() => onClick(SLUGS.DepartmentsList)}
+                    />
+                </MenuItem>
+            )}
+
+            {user.role==1 && (
                 <MenuItem
-                    id={SLUGS.overviewThree}
-                    title='Departments'
-                    level={2}
-                    icon={IconArticles}
-                    onClick={() => onClick(SLUGS.DepartmentsList)}
-                />
-            </MenuItem>
-           )}
-            <MenuItem
                 id={SLUGS.tickets}
                 title='Tickets'
                 icon={IconTickets}
                 onClick={() => onClick(SLUGS.TicketsList)}
             />
-            <MenuItem
-                id={SLUGS.DoctorsList}
-                title='Doctors'
-                icon={IconSubscription}
-                onClick={() => onClick(SLUGS.DoctorsList)}
+            )}
+
+          {user.role==3 && (
+                <MenuItem
+                id={SLUGS.tickets}
+                title='Tickets'
+                icon={IconTickets}
+                onClick={() => onClick(SLUGS.docTicketsList)}
             />
+            )}
+
+
+
+            {user.role==4 && (
+                <MenuItem
+                id={SLUGS.tickets}
+                title='Tickets'
+                icon={IconTickets}
+                onClick={() => onClick(SLUGS.patTicketsList)} 
+            />
+            )}
+            {user.role==2 && (
+                <MenuItem
+                id={SLUGS.tickets}
+                title='Tickets'
+                icon={IconTickets}
+                onClick={() => onClick(SLUGS.subTicketsList)} 
+            />
+            )}
+            
+               
+            {(user.role === 1) && (
+                <MenuItem
+                    id={SLUGS.DoctorsList}
+                    title='Doctors'
+                    icon={IconSubscription}
+                    onClick={() => onClick(SLUGS.DoctorsList)}
+                />
+            )}
+
+           {(user.role === 2) && (
+                <MenuItem
+                    id={SLUGS.SubDoctorsList}
+                    title='Doctors'
+                    icon={IconSubscription}
+                    onClick={() => onClick(SLUGS.SubDoctorsList)}
+                />
+            )}
+ 
+               {user.role==2 && (<MenuItem
+                        id={SLUGS.customers}
+                        title='Customers'
+                        icon={IconAgents}
+                        onClick={() => onClick(SLUGS.subcustomers)}
+                    />)}
+
             <MenuItem
                 id={SLUGS.ideas}
                 items={[SLUGS.ideasTwo, SLUGS.ideasThree]}
@@ -174,15 +225,22 @@ function SidebarComponent(props) {
                     onClick={() => onClick(SLUGS.ideasThree)}
                 />
             </MenuItem>
-            <MenuItem
-                id={SLUGS.contacts}
+            {/* <MenuItem
+                id={SLUGS.SubReports}
                 title='Reports'
                 icon={IconContacts}
                 onClick={() => onClick(SLUGS.Reports)}
-            />
+            /> */}
+
+            {(user.role==2 || user.role==1) && (<MenuItem
+                id={SLUGS.SubReports}
+                title='Reports'
+                icon={IconContacts}
+                onClick={() => onClick(SLUGS.SubReports)}
+            />)}
             <MenuItem
                 id={SLUGS.agents}
-                title='Payments'
+                title='Payments' 
                 icon={IconAgents}
                 onClick={() => onClick(SLUGS.agents)}
             />
@@ -192,16 +250,41 @@ function SidebarComponent(props) {
                 icon={IconArticles}
                 onClick={() => onClick(SLUGS.articles)}
             />
-
             <div className={classes.separator}></div>
 
-            <MenuItem
-                id={SLUGS.settings}
-                title='Settings'
-                icon={IconSettings}
-                onClick={() => onClick(SLUGS.adprofile)}
-            />
-
+            {user.role === 1 && (
+                <MenuItem
+                    id={SLUGS.settings}
+                    title='Settings'
+                    icon={IconSettings}
+                    onClick={() => onClick(SLUGS.adprofile)}
+                />
+            )}
+            {user.role === 2 && (
+                <MenuItem
+                    id={SLUGS.settings}
+                    title='Settings'
+                    icon={IconSettings}
+                    onClick={() => onClick(SLUGS.subprofile)}
+                />
+            )}
+            {user.role === 3 && (
+                <MenuItem
+                    id={SLUGS.settings}
+                    title='Settings'
+                    icon={IconSettings}
+                    onClick={() => onClick(SLUGS.docprofile)}
+                />
+            )}
+            {user.role === 4 && (
+                <MenuItem
+                    id={SLUGS.settings}
+                    title='Settings'
+                    icon={IconSettings}
+                    onClick={() => onClick(SLUGS.patprofile)}
+                />
+            )}
+            {/* subprofile */}
             <MenuItem id='logout' title='Logout' icon={IconLogout} onClick={logout} />
         </Menu>
     );

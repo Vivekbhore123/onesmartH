@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 const PatientRoute = ({ component: Component, ...rest }) => {
     const user = useSelector((state) => state.user);
-    console.log(user);
+    // console.log(user);
 
     return (
         <Route

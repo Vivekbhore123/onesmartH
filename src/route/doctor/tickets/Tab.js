@@ -90,8 +90,8 @@ class TicketTab extends React.Component {
                       <th>Message</th>
                       <th>Priority</th>
                       <th>Actions</th>
-                      <th>Remove</th>
-                      <th>Complete</th>
+                      {/* <th>Remove</th>
+                      <th>Complete</th> */}
                     </tr>
                   </thead>
                   <tbody>
@@ -127,11 +127,11 @@ class TicketTab extends React.Component {
                             <td>{ticket.message} </td>
                             <td>{ticket.priority}</td>
                             <td>
-                              <Link to={`/tickets/${ticket._id}`}>
+                              <Link to={`/doctickets/${ticket._id}`}>
                                 <Button color="info">show</Button>
                               </Link>
                             </td>
-                            <td>
+                            {/* <td>
                               <Button
                                 color="danger"
                                 onClick={() => {
@@ -140,15 +140,15 @@ class TicketTab extends React.Component {
                               >
                                 remove
                               </Button>
-                            </td>
-                            <td>
+                            </td> */}
+                            {/* <td>
                               <input
                                 type="checkbox"
                                 onClick={() => {
                                   this.props.handleResolve(ticket._id);
                                 }}
                               />
-                            </td>
+                            </td> */}
                           </tr>
                         )
                       );
@@ -175,8 +175,8 @@ class TicketTab extends React.Component {
                       <th>Message</th>
                       <th>Priority</th>
                       <th>Actions</th>
-                      <th>Remove</th>
-                      <th>Not Complete</th>
+                      {/* <th>Remove</th>
+                      <th>Not Complete</th> */}
                     </tr>
                   </thead>
                   <tbody>
@@ -214,11 +214,11 @@ class TicketTab extends React.Component {
                             <td>{ticket.message}</td>
                             <td>{ticket.priority}</td>
                             <td>
-                              <Link to={`/tickets/${ticket._id}`}>
+                              <Link to={`/doctickets/${ticket._id}`}>
                                 <Button color="info">show</Button>
                               </Link>
                             </td>
-                            <td>
+                            {/* <td>
                               <Button
                                 color="danger"
                                 onClick={() => {
@@ -227,15 +227,15 @@ class TicketTab extends React.Component {
                               >
                                 Remove
                               </Button>
-                            </td>
-                            <td>
+                            </td> */}
+                            {/* <td>
                               <input
                                 type="checkbox"
                                 onClick={() => {
                                   this.props.handleResolve(ticket._id);
                                 }}
                               />
-                            </td>
+                            </td> */}
                           </tr>
                         )
                       );

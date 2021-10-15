@@ -81,10 +81,13 @@ select {
 
 body {
     background-color: #f7f8fc;
+    /* background-color:darkslategray; */
     font-family: Muli;
     font-style: normal;
     font-weight: normal;
     font-size: 20px;
     line-height: 26px;
     color: #424147;
+    /* color: white; */
+
 }

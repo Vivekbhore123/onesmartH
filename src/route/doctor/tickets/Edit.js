@@ -2,13 +2,13 @@ import React from 'react'
 import TicketForm from './Form'
 
 import {connect} from 'react-redux'
-import {startEditTicket} from '../../../actions/tickets'
+import {startEditTicketTwoDoc} from '../../../actions/tickets'
 
 class TicketEdit extends React.Component{
     handleSubmit = (ticket) => {
 
-        const redirect = () => this.props.history.push(`/tickets/${ticket.id}`)
-        this.props.dispatch(startEditTicket(ticket,redirect))
+        const redirect = () => this.props.history.push(`/doctickets/${ticket.id}`)
+        this.props.dispatch(startEditTicketTwoDoc(ticket,redirect))
 
     }
     render(){

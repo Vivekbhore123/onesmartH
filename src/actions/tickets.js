@@ -9,23 +9,107 @@ export const setTickets = (ticket) => {
     }
 }
 
-export const startSetTickets = () => {
+
+export const startSetTickets = (role, email) => {
     return (dispatch) => {
-        axios.get('/tickets',{
+        if (role == 1) {
+            axios.get('/tickets', {
+                headers: {
+                    'x-auth': localStorage.getItem('authToken')
+                }
+            })
+                .then(response => {
+                    const tickets = response.data
+                    dispatch(setTickets(tickets))
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+        else
+            if (role == 4) {
+                axios.get('/pattickets', {
                     headers: {
                         'x-auth': localStorage.getItem('authToken')
                     }
                 })
-            .then(response=>{
-                const tickets = response.data
-                dispatch(setTickets(tickets))
-            })
-            .catch(err=>{
-                console.log(err)
-            })
+                    .then(response => {
+                        //  console.log(response.data);
+                        const tickets = response.data.filter(item => {
+
+                            return item.customer.email == email;
+                        })
+                        //  console.log(tickets);
+
+
+                        dispatch(setTickets(tickets))
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+            }
+
+            // test
+            else
+                if (role == 3) {
+                    axios.get('/doctickets', {
+                        headers: {
+                            'x-auth': localStorage.getItem('authToken')
+                        }
+                    })
+                        .then(response => {
+                             console.log(response.data);
+                             var arrm = [];
+                            const tickets = response.data.filter(item => {
+                                item.doctors.map(it=>{
+                                    if(it.email==email)
+                                    {
+                                        arrm.push(item);
+                                    }
+                                });
+                                return item;
+                            })
+
+                             console.log(tickets);
+                             console.log(arrm);
+
+
+                            dispatch(setTickets(arrm))
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
+                }
+                else
+                if(role==2)
+                {
+                    axios.get('/subadtickets', {
+                        headers: {
+                            'x-auth': localStorage.getItem('authToken')
+                        }
+                    })
+                        .then(response => {
+                            const tickets = response.data
+                            dispatch(setTickets(tickets))
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
+                }
+        // test
+
+
 
     }
 }
+
+// ekkkenbkn
+
+// ekkkenbkn
+
+
+
+
 
 export const removeTicket = (ticket) => {
     return {
@@ -36,18 +120,18 @@ export const removeTicket = (ticket) => {
 
 export const startRemoveTicket = (id) => {
     return (dispatch) => {
-        axios.delete(`/tickets/${id}`,{
+        axios.delete(`/tickets/${id}`, {
             headers: {
                 'x-auth': localStorage.getItem('authToken')
             }
         })
-        .then(response=>{
-            const ticket = response.data
-            dispatch(removeTicket(ticket))
-        })
-        .catch(err=>{
-            console.log(err)
-        })
+            .then(response => {
+                const ticket = response.data
+                dispatch(removeTicket(ticket))
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 }
 
@@ -58,18 +142,18 @@ export const addTicket = (ticket) => {
     }
 }
 
-export const startAddTicket = (ticket,x,redirect) => {
+export const startAddTicket = (ticket, x, redirect) => {
     console.log(ticket)
 
-     var arr = [];
-     ticket.employees.map((option) => {
-       console.log(option.id);
-       const { id } = option;
-       arr.push(id);
-       return option.value;
-     });
-     console.log(arr);
-     ticket.employees = arr;
+    var arr = [];
+    ticket.employees.map((option) => { 
+        console.log(option.id);
+        const { id } = option;
+        arr.push(id);
+        return option.value;
+    });
+    console.log(arr);
+    ticket.employees = arr;
 
     //  arrdoc test
     var arrdoc = [];
@@ -84,26 +168,62 @@ export const startAddTicket = (ticket,x,redirect) => {
     //  arrdoc test
 
 
-    ticket.isResolved=false;
+    ticket.isResolved = false;
 
     return (dispatch) => {
-        axios.post('/tickets',ticket,{
+        axios.post('/tickets', ticket, {
             headers: {
                 'x-auth': localStorage.getItem('authToken')
             }
         })
-        .then(response=>{
-            if(response.data.errors){
-                swal.fire(`${response.data.message}`,"","error")
-            } else {
-                const ticket = response.data
-               dispatch(addTicket(ticket))
-                redirect()
-            }
-        })
+            .then(response => {
+                if (response.data.errors) {
+                    swal.fire(`${response.data.message}`, "", "error")
+                } else {
+                    const ticket = response.data
+                    dispatch(addTicket(ticket))
+                    redirect()
+                }
+            })
     }
 }
 
+
+
+// &&&&&&&&&&&
+export const startAddTicketTwo = (ticket, redirect) => {
+    console.log(ticket)
+
+    // var arr = [];
+    // arr.push(ticket.empviv);
+    // console.log(arr);
+    ticket.employees.push(ticket.empviv);
+    ticket.doctors.push(ticket.doctviv);
+
+
+
+
+    ticket.isResolved = false;
+
+    return (dispatch) => {
+        axios.post('/tickets', ticket, {
+            headers: {
+                'x-auth': localStorage.getItem('authToken')
+            }
+        })
+            .then(response => {
+                if (response.data.errors) {
+                    swal.fire(`${response.data.message}`, "", "error")
+                } else {
+                    const ticket = response.data
+                    dispatch(addTicket(ticket))
+                    redirect()
+                }
+            })
+    }
+}
+
+// &&&&&&&&&&&
 export const editTicket = (ticket) => {
     return {
         type: 'EDIT_TICKET',
@@ -111,76 +231,229 @@ export const editTicket = (ticket) => {
     }
 }
 
-export const startEditTicket = (ticket,x,redirect) => {
+
+
+export const startEditTicket = (ticket, x, redirect) => {
     console.log(ticket);
     console.log(ticket.employees.length);
-    if(ticket.code)
-    {
-        var arr=[];
-    ticket.employees.map((option) => {
-        console.log(option.id)
-          const {id} = option;
-          arr.push(id)
-         return option.value;
+    if (ticket.code) {
+        var arr = [];
+        ticket.employees.map((option) => {
+            console.log(option.id)
+            const { id } = option;
+            arr.push(id)
+            return option.value;
         });
         console.log(arr);
-        ticket.employees=arr;
+        ticket.employees = arr;
 
         // trerfmk
-         var arrb = [];
-         x.map((option) => {
-             console.log(option.id);
-             const { id } = option;
-             arrb.push(id);
-             return option.value;
-         });
-         console.log(arrb);
-         ticket.doctors = arrb;
+        var arrb = [];
+        x.map((option) => {
+            console.log(option.id);
+            const { id } = option;
+            arrb.push(id);
+            return option.value;
+        });
+        console.log(arrb);
+        ticket.doctors = arrb;
         // trerfmk
 
-      return (dispatch) => {
-        axios
-          .put(`/tickets/${ticket.id}`, ticket, {
-            headers: {
-              "x-auth": localStorage.getItem("authToken"),
-            },
-          })
-          .then((response) => {
-            console.log(response.data);
-            if (response.data.errors) {
-              swal.fire(`${response.data.message}`, "", "error");
-            } else {
-              const ticket = response.data;
-              redirect();
-              dispatch(editTicket(ticket));
-              window.location.reload();
-            }
-          });
-      };
-   }
-   else{
-        return(dispatch) => {
-        axios.put(`/tickets/${ticket.id}`,ticket,{
-            headers: {
-                'x-auth': localStorage.getItem('authToken')
-            }
-        })
-        .then(response => {
-            console.log(response.data)
-            if (response.data.errors) {
-                swal.fire(`${response.data.message}`,"","error")
-            } else {
-                const ticket = response.data
-                redirect()
-                dispatch(editTicket(ticket))
-                window.location.reload();
-
-            }
-        })
+        return (dispatch) => {
+            axios
+                .put(`/tickets/${ticket.id}`, ticket, {
+                    headers: {
+                        "x-auth": localStorage.getItem("authToken"),
+                    },
+                })
+                .then((response) => {
+                    console.log(response.data);
+                    if (response.data.errors) {
+                        swal.fire(`${response.data.message}`, "", "error");
+                    } else {
+                        const ticket = response.data;
+                        redirect();
+                        dispatch(editTicket(ticket));
+                        window.location.reload();
+                    }
+                });
+        };
     }
-   }
+    else {
+        return (dispatch) => {
+            axios.put(`/tickets/${ticket.id}`, ticket, {
+                headers: {
+                    'x-auth': localStorage.getItem('authToken')
+                }
+            })
+                .then(response => {
+                    console.log(response.data)
+                    if (response.data.errors) {
+                        swal.fire(`${response.data.message}`, "", "error")
+                    } else {
+                        const ticket = response.data
+                        redirect()
+                        dispatch(editTicket(ticket))
+                        window.location.reload();
+
+                    }
+                })
+        }
+    }
 
 }
+
+
+// kkegkegkk
+// for patients
+export const startEditTicketTwo = (ticket, redirect) => {
+    console.log(ticket);
+    console.log(ticket.employees.length);
+    if (ticket.code) {
+        var arr = [];
+        ticket.employees.map((option) => {
+            console.log(option.id)
+            const { id } = option;
+            arr.push(id)
+            return option.value;
+        });
+        console.log(arr);
+        ticket.employees = arr;
+
+        ticket.doctors.push(ticket.doctviv);
+
+        // trerfmk
+        //  var arrb = [];
+        //  x.map((option) => {
+        //      console.log(option.id);
+        //      const { id } = option;
+        //      arrb.push(id);
+        //      return option.value;
+        //  });
+        //  console.log(arrb);
+        //  ticket.doctors = arrb;
+        // trerfmk
+
+        return (dispatch) => {
+            axios
+                .put(`/tickets/${ticket.id}`, ticket, {
+                    headers: {
+                        "x-auth": localStorage.getItem("authToken"),
+                    },
+                })
+                .then((response) => {
+                    console.log(response.data);
+                    if (response.data.errors) {
+                        swal.fire(`${response.data.message}`, "", "error");
+                    } else {
+                        const ticket = response.data;
+                        redirect();
+                        dispatch(editTicket(ticket));
+                        window.location.reload();
+                    }
+                });
+        };
+    }
+    else {
+        return (dispatch) => {
+            axios.put(`/tickets/${ticket.id}`, ticket, {
+                headers: {
+                    'x-auth': localStorage.getItem('authToken')
+                }
+            })
+                .then(response => {
+                    console.log(response.data)
+                    if (response.data.errors) {
+                        swal.fire(`${response.data.message}`, "", "error")
+                    } else {
+                        const ticket = response.data
+                        redirect()
+                        dispatch(editTicket(ticket))
+                        window.location.reload();
+
+                    }
+                })
+        }
+    }
+
+}
+// kkegkegkk
+
+// jnvdjvjdvjvivdoc
+
+export const startEditTicketTwoDoc = (ticket, redirect) => {
+    alert("kknfkedn");
+    console.log(ticket);
+    console.log(ticket.employees.length);
+    if (ticket.code) {
+        var arr = [];
+        ticket.employees.map((option) => {
+            console.log(option.id)
+            const { id } = option;
+            arr.push(id)
+            return option.value;
+        });
+        console.log(arr);
+        ticket.employees = arr;
+
+        // ticket.doctors.push(ticket.doctviv);
+
+        // trerfmk
+        //  var arrb = [];
+        //  x.map((option) => {
+        //      console.log(option.id);
+        //      const { id } = option;
+        //      arrb.push(id);
+        //      return option.value;
+        //  });
+        //  console.log(arrb);
+        //  ticket.doctors = arrb;
+        // trerfmk
+
+        return (dispatch) => {
+            axios
+                .put(`/tickets/${ticket.id}`, ticket, {
+                    headers: {
+                        "x-auth": localStorage.getItem("authToken"),
+                    },
+                })
+                .then((response) => {
+                    console.log(response.data);
+                    if (response.data.errors) {
+                        swal.fire(`${response.data.message}`, "", "error");
+                    } else {
+                        const ticket = response.data;
+                        redirect();
+                        dispatch(editTicket(ticket));
+                        window.location.reload();
+                    }
+                });
+        };
+    }
+    else {
+        return (dispatch) => {
+            axios.put(`/tickets/${ticket.id}`, ticket, {
+                headers: {
+                    'x-auth': localStorage.getItem('authToken')
+                }
+            })
+                .then(response => {
+                    console.log(response.data)
+                    if (response.data.errors) {
+                        swal.fire(`${response.data.message}`, "", "error")
+                    } else {
+                        const ticket = response.data
+                        redirect()
+                        dispatch(editTicket(ticket))
+                        window.location.reload();
+
+                    }
+                })
+        }
+    }
+
+}
+// jnvdjvjdvjviv
 
 export const toggleResolve = (ticket) => {
     return {
@@ -189,14 +462,14 @@ export const toggleResolve = (ticket) => {
     }
 }
 
-export const startToggleResolve = (id,isResolved) => {
-    return(dispatch) => {
-        axios.put(`/tickets/${id}`,{isResolved:!isResolved},{
+export const startToggleResolve = (id, isResolved) => {
+    return (dispatch) => {
+        axios.put(`/tickets/${id}`, { isResolved: !isResolved }, {
             headers: {
                 'x-auth': localStorage.getItem('authToken')
             }
         })
-            dispatch(toggleResolve(id))
+        dispatch(toggleResolve(id))
 
     }
 }

@@ -177,7 +177,7 @@ function HeaderComponent(props) {
                     label={
                         <>
                             <span className={classes.name}>Welcome {user.username}</span>
-                            <img src={Avata} alt='avatar' className={classes.avatar} />
+                            <img src={user.pic} alt='avatar' className={classes.avatar} />
                         </>
                     }
                     options={[

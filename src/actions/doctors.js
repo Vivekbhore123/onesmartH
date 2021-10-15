@@ -2,12 +2,20 @@ import axios from '../config/axios';
 
 import swal from 'sweetalert2';
 
-export const setDoctors = (doctor) => {
+export const setDoctors = (doctor) => { 
     return {
         type: 'SET_DOCTORS',
         payload: doctor
     };
 };
+
+export const setSubDoctors = (doctor) => { 
+    return {
+        type: 'SET_SUB_DOCTORS',
+        payload: doctor
+    };
+};
+
 
 export const startSetDoctors = () => {
     console.log('testing from startSetDoctors');
@@ -118,3 +126,23 @@ export const updateDoctorDepartment = (department) => {
         payload: department
     };
 };
+
+export const startSetDoctorsForSubadmins = ()=>{
+    // console.log('testing from substartSetDoctors');
+    return (dispatch) => {
+        axios
+            .get('/subdoctors', {
+                headers: {
+                    'x-auth': localStorage.getItem('authToken')
+                }
+            })
+            .then((response) => {
+                const doctors = response.data;
+                console.log(doctors);
+                dispatch(setSubDoctors(doctors));
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+}

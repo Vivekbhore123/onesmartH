@@ -2,13 +2,16 @@ import React from 'react'
 import TicketForm from './Form'
 
 import {connect} from 'react-redux'
+// import {startEditTicket} from '../../actions/tickets'
 import {startEditTicket} from '../../../actions/tickets'
 
 class TicketEdit extends React.Component{
-    handleSubmit = (ticket) => {
+    handleSubmit = (ticket,x) => {
+        console.log(ticket);
 
         const redirect = () => this.props.history.push(`/tickets/${ticket.id}`)
-        this.props.dispatch(startEditTicket(ticket,redirect))
+        // const redirect = () => console.log("new testing");
+        this.props.dispatch(startEditTicket(ticket,x,redirect))
 
     }
     render(){
@@ -28,8 +31,9 @@ class TicketEdit extends React.Component{
 
 const mapStateToProps = (state,props) => {
     const id = props.match.params.id
+    console.log(state.tickets);
     return {
-        ticket: state.tickets.find(ticket=>ticket._id == id)
+        ticket: state.tickets.find(ticket=>ticket._id === id)
     }
 }
 

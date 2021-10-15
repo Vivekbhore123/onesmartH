@@ -2,7 +2,7 @@ import LoadingComponent from 'components/loading';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import SLUGS from 'resources/slugs';
-import CreateNewPassword from './admin/profile/createNewPassword';
+import CreateNewPassword from './user/createNewPassword';
 import ForgotPassword from './user/ForgotPassword';
 
 import Login from './user/Login';

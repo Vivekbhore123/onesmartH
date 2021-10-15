@@ -10,7 +10,7 @@ const DoctorRoute = ({ component: Component, ...rest }) => {
         <Route
             {...rest}
             render={(props) =>
-                user && user.role === 3 ? (
+                user && user.role === 3 ? ( 
                     <Component {...props} />
                 ) : (
                     <Redirect

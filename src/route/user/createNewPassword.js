@@ -4,7 +4,7 @@ import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 // import Loader from "./loader";
-import { resetPassword } from "../../../actions/user"; 
+import { resetPassword } from "../../actions/user";
 
 const CreateNewPassword = ({ match }) => {
   const dispatch = useDispatch();
